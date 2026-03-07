@@ -1,2 +1,1 @@
-# vanlife-social
 # camper-jam
