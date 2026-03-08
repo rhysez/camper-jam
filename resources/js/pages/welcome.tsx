@@ -1,4 +1,5 @@
 import { Head, Link, usePage } from '@inertiajs/react';
+import { Spline } from 'lucide-react';
 import { dashboard, login, register } from '@/routes';
 
 export default function Welcome({
@@ -7,6 +8,8 @@ export default function Welcome({
     canRegister?: boolean;
 }) {
     const { auth } = usePage().props;
+
+    const linkStyles = "px-4 py-2 rounded-full font-bold text-neutral-800 hover:bg-alpine hover:text-background transition-colors";
 
     return (
         <>
@@ -17,36 +20,39 @@ export default function Welcome({
                     rel="stylesheet"
                 />
             </Head>
-            <div className="">
-                <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
-                    <nav className="flex items-center justify-end gap-4">
+            <div className="min-h-screen bg-mountain-dusk p-8">
+                <nav className="flex justify-between">
+                    <div className={"flex items-center gap-2"}>
+                        <h2 className={'text-3xl font-black text-background'}>
+                            CamperJam
+                        </h2>
+                        <Spline size={28} className={'text-background'} />
+                    </div>
+                    <>
                         {auth.user ? (
-                            <Link
-                                href={dashboard()}
-                                className=""
-                            >
+                            <Link href={dashboard()} className="">
                                 Dashboard
                             </Link>
                         ) : (
-                            <>
+                            <div className={'space-x-4'}>
                                 <Link
                                     href={login()}
-                                    className=""
+                                    className={`bg-background ${linkStyles}`}
                                 >
                                     Log in
                                 </Link>
                                 {canRegister && (
                                     <Link
                                         href={register()}
-                                        className=""
+                                        className={`bg-limestone ${linkStyles}`}
                                     >
                                         Create account
                                     </Link>
                                 )}
-                            </>
+                            </div>
                         )}
-                    </nav>
-                </header>
+                    </>
+                </nav>
             </div>
         </>
     );
