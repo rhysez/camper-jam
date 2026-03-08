@@ -22,6 +22,9 @@
     --color-mountain-dusk: var(--mountain-dusk);
     --color-cedar-lodge: var(--cedar-lodge);
     --color-limestone: var(--limestone);
+    --color-ruby: var(--color-red-700);
+    --color-ash: var(--color-neutral-800);
+    --color-rice: var(--background);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);

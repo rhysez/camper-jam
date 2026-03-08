@@ -1,5 +1,5 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import { Spline } from 'lucide-react';
+import CamperJamTypeLogo from '@/components/custom/brand/CamperJamTypeLogo';
 import { dashboard, login, register } from '@/routes';
 
 export default function Welcome({
@@ -22,16 +22,11 @@ export default function Welcome({
             </Head>
             <div className="min-h-screen bg-mountain-dusk p-8">
                 <nav className="flex justify-between">
-                    <div className={"flex items-center gap-2"}>
-                        <h2 className={'text-3xl font-black text-background'}>
-                            CamperJam
-                        </h2>
-                        <Spline size={28} className={'text-background'} />
-                    </div>
+                    <CamperJamTypeLogo />
                     <>
                         {auth.user ? (
-                            <Link href={dashboard()} className="">
-                                Dashboard
+                            <Link href={dashboard()} className={`bg-limestone ${linkStyles}`}>
+                                Jump back in
                             </Link>
                         ) : (
                             <div className={'space-x-4'}>
@@ -44,7 +39,7 @@ export default function Welcome({
                                 {canRegister && (
                                     <Link
                                         href={register()}
-                                        className={`bg-limestone ${linkStyles}`}
+                                        className={`bg-limestone outline-2 outline-offset-2 ${linkStyles}`}
                                     >
                                         Create account
                                     </Link>
@@ -53,6 +48,9 @@ export default function Welcome({
                         )}
                     </>
                 </nav>
+                <div className={"bg-alpine text-background mt-24 mx-auto text-center rounded-full outline-2 outline-offset-2 outline-alpine p-2 px-6 w-fit"}>
+                    Nothing here yet!
+                </div>
             </div>
         </>
     );
