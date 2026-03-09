@@ -15,7 +15,7 @@ let currentAppearance: Appearance = 'system';
 const prefersDark = (): boolean => {
     if (typeof window === 'undefined') return false;
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia('(prefers-color-scheme: light)').matches;
 };
 
 const setCookie = (name: string, value: string, days = 365): void => {
@@ -54,7 +54,7 @@ const notify = (): void => listeners.forEach((listener) => listener());
 const mediaQuery = (): MediaQueryList | null => {
     if (typeof window === 'undefined') return null;
 
-    return window.matchMedia('(prefers-color-scheme: dark)');
+    return window.matchMedia('(prefers-color-scheme: light)');
 };
 
 const handleSystemThemeChange = (): void => applyTheme(currentAppearance);
@@ -63,8 +63,8 @@ export function initializeTheme(): void {
     if (typeof window === 'undefined') return;
 
     if (!localStorage.getItem('appearance')) {
-        localStorage.setItem('appearance', 'system');
-        setCookie('appearance', 'system');
+        localStorage.setItem('appearance', 'light');
+        setCookie('appearance', 'light');
     }
 
     currentAppearance = getStoredAppearance();

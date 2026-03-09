@@ -22,7 +22,7 @@ export default function Welcome({
             </Head>
             <div className="min-h-screen bg-mountain-dusk p-8">
                 <nav className="flex justify-between">
-                    <CamperJamTypeLogo />
+                    <CamperJamTypeLogo size="lg" />
                     <>
                         {auth.user ? (
                             <Link href={dashboard()} className={`bg-limestone ${linkStyles}`}>

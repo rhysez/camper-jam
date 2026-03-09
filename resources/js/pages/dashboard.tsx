@@ -1,22 +1,14 @@
-import { Head } from '@inertiajs/react';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
+import AppLayout from "@/layouts/app-layout";
+import AppHeaderLayout from "@/layouts/app/app-header-layout";
+import { User } from "@/types";
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Feed',
-        href: dashboard(),
-    },
-];
+type Props = { users: User[] };
 
-export default function Feed() {
+export default function Feed({ users }: Props) {
+    console.log(users)
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Feed" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-
-            </div>
-        </AppLayout>
+        <AppHeaderLayout>
+            <p>Hello</p>
+        </AppHeaderLayout>
     );
 }
