@@ -2,14 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Friendship extends Pivot
+class Friendship extends Model
 {
+    use HasFactory, HasUuids;
+
     protected $table = 'friendships';
 
     protected $casts = [
         'accepted_at' => 'datetime',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'friend_id',
+        'status',
+        'accepted_at',
     ];
 
     public function isPending(): bool
