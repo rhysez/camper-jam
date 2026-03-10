@@ -13,7 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { feed } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -29,7 +29,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" className="bg-mountain-dusk" asChild>
-                            <Link href={dashboard()} prefetch className="flex items-center justify-center">
+                            <Link href={feed()} prefetch className="flex items-center justify-center">
                                 <Spline className="text-rice" />
                             </Link>
                         </SidebarMenuButton>

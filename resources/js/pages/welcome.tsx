@@ -1,6 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import CamperJamTypeLogo from '@/components/custom/brand/CamperJamTypeLogo';
-import { dashboard, login, register } from '@/routes';
+import { feed, login, register } from '@/routes';
 
 export default function Welcome({
     canRegister = true,
@@ -25,7 +25,7 @@ export default function Welcome({
                     <CamperJamTypeLogo size="lg" />
                     <>
                         {auth.user ? (
-                            <Link href={dashboard()} className={`bg-limestone ${linkStyles}`}>
+                            <Link href={feed()} className={`bg-limestone ${linkStyles}`}>
                                 Jump back in
                             </Link>
                         ) : (

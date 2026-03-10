@@ -9,7 +9,7 @@ Route::inertia('/', 'welcome', [
 ])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/feed', [UserController::class, 'index'])->name('dashboard');
+    Route::get('/feed', [UserController::class, 'index'])->name('feed');
 });
 
 require __DIR__.'/settings.php';

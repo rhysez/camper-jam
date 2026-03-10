@@ -15,7 +15,7 @@ class UserController extends Controller
             ->orderBy('name')
             ->get();
 
-        return Inertia::render('dashboard', [
+        return Inertia::render('feed', [
             'users' => $users,
         ]);
     }

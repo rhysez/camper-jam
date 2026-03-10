@@ -1,6 +1,5 @@
-import AppLayout from "@/layouts/app-layout";
 import AppHeaderLayout from "@/layouts/app/app-header-layout";
-import { User } from "@/types";
+import type { User } from "@/types";
 
 type Props = { users: User[] };
 
