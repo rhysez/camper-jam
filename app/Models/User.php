@@ -56,4 +56,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Van::class);
     }
+
+    public function sentFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
+            ->withPivot('status', 'accepted_at')
+            ->withTimestamps();
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'friend_id', 'user_id')
+            ->withPivot('status', 'accepted_at')
+            ->withTimestamps();
+    }
+
+    public function friends()
+    {
+        $sent = $this->sentFriendRequests()->wherePivot('status', 'accepted');
+        $received = $this->receivedFriendRequests()->wherePivot('status', 'accepted');
+
+        return $sent->get()->merge($received->get());
+    }
 }
