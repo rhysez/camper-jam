@@ -18,7 +18,7 @@ export default function CamperJamTypeLogo({ size = "md" }: Props) {
     return (
         <div className={'flex items-center gap-2'}>
             <Spline size={sizing.iconSize} className={'text-background'} />
-            <h2 className={`${sizing.textSize} font-black text-background font-serif`}>CamperJam</h2>
+            <h2 className={`${sizing.textSize} font-black text-background font-sans`}>CamperJam</h2>
         </div>
     );
 }

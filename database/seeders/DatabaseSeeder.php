@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Friendship;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Van;
@@ -31,5 +32,11 @@ class DatabaseSeeder extends Seeder
 
         // Create 10 vans belonging to 10 users.
         Van::factory(10)->create();
+
+        // Add 10 friends to user account
+        Friendship::factory(10)->create([
+            'user_id' => $testUser->id,
+            'status' => 'accepted',
+        ]);
     }
 }

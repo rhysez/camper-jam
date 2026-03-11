@@ -21,6 +21,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -55,5 +56,35 @@ class User extends Authenticatable
     public function vans(): HasMany
     {
         return $this->hasMany(Van::class);
+    }
+
+    public function sentFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
+            ->withPivot('status', 'accepted_at')
+            ->withTimestamps();
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'friend_id', 'user_id')
+            ->withPivot('status', 'accepted_at')
+            ->withTimestamps();
+    }
+
+    public function friends()
+    {
+        $sent = $this->sentFriendRequests()->wherePivot('status', 'accepted');
+        $received = $this->receivedFriendRequests()->wherePivot('status', 'accepted');
+
+        return $sent->get()->merge($received->get());
+    }
+
+    public function pendingFriends()
+    {
+        $sent = $this->sentFriendRequests()->wherePivot('status', 'pending');
+        $received = $this->receivedFriendRequests()->wherePivot('status', 'pending');
+
+        return $sent->get()->merge($received->get());
     }
 }
