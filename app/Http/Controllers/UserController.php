@@ -10,13 +10,6 @@ class UserController extends Controller
 {
     public function index(): Response
     {
-        $users = User::query()
-            ->select(['id', 'name', 'is_travelling'])
-            ->orderBy('name')
-            ->get();
-
-        return Inertia::render('feed', [
-            'users' => $users,
-        ]);
+        return Inertia::render('feed');
     }
 }

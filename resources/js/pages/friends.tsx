@@ -4,8 +4,9 @@ type Props = {
     friends: {
         id: string;
         name: string;
+        is_travelling: boolean;
     }[],
-    filters: any
+    filters: {status: string}
 }
 
 export default function Friends({ friends, filters }: Props) {
@@ -13,7 +14,7 @@ export default function Friends({ friends, filters }: Props) {
         router.get('/friends', {status: newStatus}, {preserveState: true, replace: true})
     }
 
-    console.log(friends);
+    console.log(filters);
     return (
         <>
 

@@ -43,7 +43,7 @@ test('index filters friends by status', function () {
     $user = User::factory()->create();
     $this->actingAs($user);
 
-    Friendship::factory()->create(['user_id' => $user->id, 'status' => 'accepted']);
+    $acceptedFriendship = Friendship::factory()->create(['user_id' => $user->id, 'status' => 'accepted']);
     $pendingFriendship = Friendship::factory()->create(['user_id' => $user->id, 'status' => 'pending']);
 
     $response = $this->get('/friends?status=pending');
@@ -52,6 +52,18 @@ test('index filters friends by status', function () {
         ->has('friends', 1)
         ->where('friends.0.id', $pendingFriendship->friend_id)
     );
+
+    $response = $this->get('/friends');
+
+    $response->assertInertia(fn (Assert $page) => $page
+        ->has('friends', 1)
+        ->where('friends.0.id', $acceptedFriendship->friend_id)
+    );
+});
+
+test('index returns 401 for unauthenticated user', function () {
+    $response = $this->getJson('/friends');
+    $response->assertStatus(401);
 });
 
 

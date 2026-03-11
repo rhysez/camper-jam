@@ -17,7 +17,7 @@ class FriendshipController extends Controller
             $friendships = $request->user()->friends();
         }
 
-        $friends = $friendships->select(['id', 'name']);
+        $friends = $friendships->select(['id', 'name', 'is_travelling']);
 
         return Inertia::render('friends', [
             'friends' => $friends,
