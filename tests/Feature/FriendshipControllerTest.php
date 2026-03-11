@@ -38,3 +38,20 @@ test('index returns accepted friends for authenticated user', function () {
         })
     );
 });
+
+test('index filters friends by status', function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+
+    Friendship::factory()->create(['user_id' => $user->id, 'status' => 'accepted']);
+    $pendingFriendship = Friendship::factory()->create(['user_id' => $user->id, 'status' => 'pending']);
+
+    $response = $this->get('/friends?status=pending');
+
+    $response->assertInertia(fn (Assert $page) => $page
+        ->has('friends', 1)
+        ->where('friends.0.id', $pendingFriendship->friend_id)
+    );
+});
+
+

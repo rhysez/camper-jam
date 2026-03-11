@@ -1,17 +1,41 @@
-import { usePage } from "@inertiajs/react";
+import { router } from '@inertiajs/react';
 
 type Props = {
     friends: {
         id: string;
         name: string;
-    }[]
+    }[],
+    filters: any
 }
 
-export default function Friends({ friends }: Props) {
+export default function Friends({ friends, filters }: Props) {
+    const handleStatusChange = (newStatus: string) => {
+        router.get('/friends', {status: newStatus}, {preserveState: true, replace: true})
+    }
+
     console.log(friends);
     return (
-        <ul>
-            {friends.map(friend => (<li className="text-ash" key={friend.id}>{friend.name}</li>))}
-        </ul>
-    )
+        <>
+
+            <div>
+                <select
+                    value={filters.status || ''}
+                    onChange={(e) => handleStatusChange(e.target.value)}
+                    className={"bg-ash"}
+                >
+                    <option value="">All Friends</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="pending">Pending</option>
+                </select>
+
+                <ul>
+                {friends.map((friend) => (
+                    <li className="text-ash" key={friend.id}>
+                        {friend.name}
+                    </li>
+                ))}
+            </ul>
+            </div>
+        </>
+    );
 }

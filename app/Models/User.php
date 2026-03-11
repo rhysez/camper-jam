@@ -79,4 +79,12 @@ class User extends Authenticatable
 
         return $sent->get()->merge($received->get());
     }
+
+    public function pendingFriends()
+    {
+        $sent = $this->sentFriendRequests()->wherePivot('status', 'pending');
+        $received = $this->receivedFriendRequests()->wherePivot('status', 'pending');
+
+        return $sent->get()->merge($received->get());
+    }
 }
